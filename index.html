@@ -1,0 +1,1082 @@
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Home · Battlepie</title>
+<meta name="description" content="Join hundreds of players exploring unique gamemodes, custom items, and a tight-knit community. Link your Discord to track stats, claim rewards, and stay connected.">
+<link rel="icon" href="/uploads/logo-1783260029774.png">
+
+<script>
+(function () {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  try { localStorage.setItem('zl-theme', 'dark'); } catch (e) {}
+})();
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    borderRadius: {
+      none: '0px',
+      sm: '0.0625rem',
+      DEFAULT: '0.125rem',
+      md: '0.1875rem',
+      lg: '0.25rem',
+      xl: '0.375rem',
+      '2xl': '0.5rem',
+      '3xl': '0.75rem',
+      full: '9999px',
+    },
+    extend: {
+      colors: { accent: '#FF2200' },
+      fontFamily: {
+        sans: ['Poppins', 'ui-sans-serif', 'system-ui'],
+        display: ['Poppins', 'ui-sans-serif'],
+      },
+    }
+  }
+};
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Preconnect to external image CDNs so skin/logo/bg images load faster -->
+<link rel="preconnect" href="https://mc-heads.net" crossorigin>
+<link rel="preconnect" href="https://cdn.discordapp.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<!-- Preload hero background if set, so the browser starts fetching it immediately -->
+<link rel="preload" as="image" href="/uploads/bg-1783260044152.png">
+<link rel="preload" as="image" href="/uploads/logo-1783260029774.png">
+<style>
+  /* ---------- Theme tokens ---------- */
+  :root[data-theme="dark"] {
+    --bg:        #05070c;
+    --bg-soft:   #0b0f18;
+    --bg-spot-1: rgba(0,229,255,.12);
+    --bg-spot-2: rgba(124,58,237,.10);
+    --text:      #e5e7eb;
+    --text-soft: rgba(229,231,235,.6);
+    --border:    rgba(255,255,255,.06);
+    --border-2:  rgba(255,255,255,.10);
+    --surface-1: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+    --surface-2: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+    --glass-bg:  rgba(15,18,26,.65);
+    --input-bg:  rgba(0,0,0,.35);
+    --input-border: rgba(255,255,255,.12);
+    --dropdown-bg: rgba(3,5,10,.82);
+    --hero-overlay: linear-gradient(to bottom, rgba(5,7,12,.45), #050710);
+    --shadow-soft: 0 14px 40px -20px rgba(0,0,0,.85);
+    --shadow-card: 0 22px 60px -30px rgba(0,0,0,.9);
+    --scrollbar-track: rgba(255,255,255,.03);
+    --scrollbar-thumb: rgba(255,255,255,.14);
+    --scrollbar-thumb-hover: rgba(255,255,255,.28);
+  }
+  :root[data-theme="light"] {
+    --bg:        #f3f5fa;
+    --bg-soft:   #ffffff;
+    --bg-spot-1: rgba(14,165,233,.12);
+    --bg-spot-2: rgba(99,102,241,.10);
+    --text:      #0d1117;
+    --text-soft: rgba(13,17,23,.6);
+    --border:    rgba(13,17,23,.10);
+    --border-2:  rgba(13,17,23,.14);
+    --surface-1: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.82));
+    --surface-2: linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.9));
+    --glass-bg:  rgba(255,255,255,.82);
+    --input-bg:  rgba(255,255,255,.95);
+    --input-border: rgba(13,17,23,.14);
+    --dropdown-bg: rgba(255,255,255,.92);
+    --hero-overlay: linear-gradient(to bottom, rgba(243,245,250,.28), #f3f5fa);
+    --shadow-soft: 0 16px 45px -26px rgba(15,23,42,.28);
+    --shadow-card: 0 28px 70px -36px rgba(15,23,42,.35);
+    --scrollbar-track: rgba(13,17,23,.04);
+    --scrollbar-thumb: rgba(13,17,23,.18);
+    --scrollbar-thumb-hover: rgba(13,17,23,.32);
+  }
+  html, body {
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(900px 520px at -12% -20%, var(--bg-spot-1), transparent 60%),
+      radial-gradient(760px 460px at 112% -14%, var(--bg-spot-2), transparent 58%);
+    color: var(--text);
+  }
+  /* In light mode the existing Tailwind utility classes (text-white/60 etc.)
+     would lose contrast — so we re-map the most common ones. */
+  :root[data-theme="light"] .text-white\/40,
+  :root[data-theme="light"] .text-white\/50,
+  :root[data-theme="light"] .text-white\/60,
+  :root[data-theme="light"] .text-white\/70,
+  :root[data-theme="light"] .text-white\/80,
+  :root[data-theme="light"] .text-white\/90 { color: rgba(13,17,23,.7) !important; }
+  :root[data-theme="light"] .text-white\/20,
+  :root[data-theme="light"] .text-white\/30,
+  :root[data-theme="light"] .text-white\/35,
+  :root[data-theme="light"] .text-white\/45 { color: rgba(13,17,23,.48) !important; }
+  :root[data-theme="light"] .text-white { color: #0d1117 !important; }
+  :root[data-theme="light"] .bg-white\/5,
+  :root[data-theme="light"] .bg-white\/10  { background: rgba(13,17,23,.05) !important; }
+  :root[data-theme="light"] .border-white\/5,
+  :root[data-theme="light"] .border-white\/10,
+  :root[data-theme="light"] .border-white\/15,
+  :root[data-theme="light"] .border-white\/20 { border-color: rgba(13,17,23,.1) !important; }
+  :root[data-theme="light"] .bg-black\/20,
+  :root[data-theme="light"] .bg-black\/30,
+  :root[data-theme="light"] .bg-black\/40 { background: rgba(255,255,255,.86) !important; }
+  :root[data-theme="light"] .bg-black\/70,
+  :root[data-theme="light"] .bg-black\/80 { background: rgba(13,17,23,.5) !important; }
+  :root[data-theme="light"] .hover\:bg-white\/5:hover,
+  :root[data-theme="light"] .hover\:bg-white\/10:hover { background: rgba(13,17,23,.06) !important; }
+  :root[data-theme="light"] .hover\:text-white:hover { color: #0d1117 !important; }
+  :root[data-theme="light"] .ring-white\/10 { --tw-ring-color: rgba(13,17,23,.1) !important; }
+
+  .glass {
+    background: var(--glass-bg);
+    border-color: var(--border);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  }
+  .btn-accent { background: var(--tw-accent, #FF2200); color: #001018; }
+  .hero-bg {
+    background-image: var(--hero-overlay), url('/uploads/bg-1783260044152.png');
+    background-size: auto, cover;
+    background-position: center, center calc(50% + -80px);
+    background-repeat: no-repeat;
+  }
+  .btn { display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border-radius:.375rem;font-weight:600;transition:all .15s; }
+  .btn:hover { transform: translateY(-1px); }
+  .quick-buy { position: relative; overflow: hidden; }
+  .quick-buy::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent);
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  .quick-buy:hover::after { animation: quickbuy-sheen .6s ease; }
+  @keyframes quickbuy-sheen {
+    0% { transform: translateX(-120%); opacity: 0; }
+    20% { opacity: .6; }
+    100% { transform: translateX(120%); opacity: 0; }
+  }
+  .card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: .625rem;
+    box-shadow: var(--shadow-card);
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  input[type="tel"],
+  textarea,
+  select {
+    color: var(--text);
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="password"]:focus,
+  input[type="search"]:focus,
+  input[type="url"]:focus,
+  input[type="tel"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: color-mix(in srgb, #FF2200 55%, #ffffff 45%);
+    box-shadow: 0 0 0 1px color-mix(in srgb, #FF2200 45%, transparent), 0 10px 26px -18px rgba(0,0,0,.65);
+    outline: none;
+  }
+
+  /* ---------- Form selects ---------- */
+  /* Browsers often render native select menus as white while inheriting white
+     text from our dark theme classes, which causes white-on-white options.
+     Force explicit menu colours for readability site-wide. */
+  select option,
+  select optgroup {
+    color: #e5e7eb;
+    background-color: #0b0f18;
+  }
+  :root[data-theme="light"] select option,
+  :root[data-theme="light"] select optgroup {
+    color: #0d1117;
+    background-color: #ffffff;
+  }
+
+  .dropdown-menu {
+    background: var(--dropdown-bg);
+    border: 1px solid var(--border-2);
+    border-radius: .275rem;
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    box-shadow: 0 25px 70px -20px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.03);
+  }
+  :root[data-theme="light"] .dropdown-menu {
+    box-shadow: 0 26px 65px -26px rgba(15,23,42,.26), 0 0 0 1px rgba(13,17,23,.04);
+  }
+  .accent-ring { box-shadow: 0 0 0 1px rgba(0,229,255,.3), 0 10px 40px -10px rgba(0,229,255,.35); }
+  .skel { background: linear-gradient(90deg, rgba(255,255,255,.04), rgba(255,255,255,.08), rgba(255,255,255,.04)); background-size: 200% 100%; animation: sh 1.6s infinite; }
+  @keyframes sh { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
+  a { color: inherit; }
+  .nav-link {
+    position: relative;
+    padding: .5rem .8rem;
+    border-radius: .45rem;
+    transition: background .15s, color .15s, transform .15s;
+  }
+  .nav-link:hover { background: rgba(255,255,255,.06); color: white; }
+  .nav-link:active { transform: translateY(1px); }
+  :root[data-theme="light"] .nav-link:hover { background: rgba(13,17,23,.05); color: #0d1117; }
+
+  /* ---------- Pretty scrollbars (site-wide) ---------- */
+  /* Firefox */
+  * { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); }
+  /* WebKit / Blink */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background .15s;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); background-clip: padding-box; }
+  ::-webkit-scrollbar-corner { background: transparent; }
+
+  /* ---------- Theme toggle button ---------- */
+  .theme-toggle {
+    width: 36px; height: 36px; border-radius: 5px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,.04); border: 1px solid var(--border);
+    color: var(--text-soft);
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .theme-toggle:hover { background: rgba(255,255,255,.08); color: var(--text); }
+  :root[data-theme="light"] .theme-toggle { background: rgba(13,17,23,.04); }
+  :root[data-theme="light"] .theme-toggle:hover { background: rgba(13,17,23,.08); }
+  .theme-toggle .icon-sun, .theme-toggle .icon-moon { width: 18px; height: 18px; }
+  :root[data-theme="dark"]  .theme-toggle .icon-sun  { display: none; }
+  :root[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+  :root[data-theme="light"] .theme-toggle {
+    border-color: rgba(13,17,23,.14);
+    box-shadow: 0 10px 24px -18px rgba(15,23,42,.5);
+  }
+
+  /* ---------- Light-mode flash / status pills ---------- */
+  /* The dark-mode chips use rgba on white; in light mode they wash out into the
+     white background. Re-tint them to dark-on-tinted-bg for legibility. */
+  :root[data-theme="light"] .bg-emerald-500\/10,
+  :root[data-theme="light"] .bg-emerald-500\/15 { background: rgba(5,150,105,.12) !important; }
+  :root[data-theme="light"] .bg-rose-500\/10,
+  :root[data-theme="light"] .bg-rose-500\/15    { background: rgba(225,29,72,.10) !important; }
+  :root[data-theme="light"] .bg-amber-500\/10,
+  :root[data-theme="light"] .bg-amber-500\/15   { background: rgba(180,83,9,.12) !important; }
+  :root[data-theme="light"] .bg-sky-500\/10,
+  :root[data-theme="light"] .bg-sky-500\/15     { background: rgba(2,132,199,.12) !important; }
+  :root[data-theme="light"] .border-emerald-400\/30,
+  :root[data-theme="light"] .border-emerald-500\/30 { border-color: rgba(5,150,105,.35) !important; }
+  :root[data-theme="light"] .border-rose-400\/30,
+  :root[data-theme="light"] .border-rose-500\/30    { border-color: rgba(225,29,72,.35) !important; }
+  :root[data-theme="light"] .border-amber-400\/30,
+  :root[data-theme="light"] .border-amber-500\/30   { border-color: rgba(180,83,9,.35) !important; }
+  :root[data-theme="light"] .border-sky-400\/30,
+  :root[data-theme="light"] .border-sky-500\/30     { border-color: rgba(2,132,199,.35) !important; }
+  :root[data-theme="light"] .text-emerald-100,
+  :root[data-theme="light"] .text-emerald-200,
+  :root[data-theme="light"] .text-emerald-300 { color: #047857 !important; }
+  :root[data-theme="light"] .text-rose-100,
+  :root[data-theme="light"] .text-rose-200,
+  :root[data-theme="light"] .text-rose-300    { color: #be123c !important; }
+  :root[data-theme="light"] .text-amber-100,
+  :root[data-theme="light"] .text-amber-200,
+  :root[data-theme="light"] .text-amber-300   { color: #b45309 !important; }
+  :root[data-theme="light"] .text-sky-100,
+  :root[data-theme="light"] .text-sky-200,
+  :root[data-theme="light"] .text-sky-300     { color: #0369a1 !important; }
+
+  /* ---------- IP blur / reveal / copy ---------- */
+  /* Inline pill that hides an IP under a blur until hovered. Click anywhere on
+     the pill to copy the IP to the clipboard. While the .ip-pill-copied class
+     is applied (briefly, by JS), the pill flashes green and shows "Copied". */
+  .ip-pill {
+    display: inline-flex; align-items: center;
+     /* Compact pill radius for a tighter UI while keeping the IP readable. */
+     padding: .45rem .85rem; border-radius: 4px;
+    max-width: 100%;
+    background: rgba(255,255,255,.04); border: 1px solid var(--border);
+    font: 600 .78rem/1.1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    cursor: pointer; user-select: all;
+    transition: background .15s, border-color .15s, color .15s;
+  }
+  :root[data-theme="light"] .ip-pill { background: rgba(13,17,23,.04); }
+  .ip-pill .ip-text {
+    filter: blur(5px);
+    transition: filter .15s;
+    color: var(--text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .ip-pill:hover .ip-text,
+  .ip-pill:focus-visible .ip-text { filter: blur(0); }
+  .ip-pill.ip-pill-copied {
+    background: rgba(16,185,129,.15);
+    border-color: rgba(16,185,129,.45);
+    color: #6ee7b7;
+  }
+  .ip-pill.ip-pill-copied .ip-text { filter: blur(0); }
+
+  /* IP icon tile theme support */
+  #ip-icon-tile {
+    background: color-mix(in srgb, #FF2200 18%, transparent);
+    border: 1px solid color-mix(in srgb, #FF2200 38%, transparent);
+    color: #FF2200;
+    transition: background .2s ease, border-color .2s ease, color .2s ease;
+  }
+  :root[data-theme="light"] #ip-icon-tile {
+    background: color-mix(in srgb, #FF2200 14%, white);
+    border-color: color-mix(in srgb, #FF2200 45%, transparent);
+    color: #FF2200;
+  }
+  #ip-icon-tile.ip-copied {
+    background: rgba(52,211,153,.95) !important;
+    border-color: rgba(52,211,153,1) !important;
+    color: #052e1b !important;
+  }
+</style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+  
+  
+  
+  <nav x-data="{ mobileOpen: false }" class="sticky top-0 z-40 glass border-b border-white/5">
+    <!--
+      3-column grid (logo | center menu | user menu).
+      `flex justify-between` only pushes the centre to the middle when the
+      side columns have equal width. Using a grid with the centre cell
+      `justify-self-center` keeps the menu visually centred even when the
+      left and right sides differ (e.g. logged in users vs. anonymous).
+    -->
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 h-16 grid grid-cols-[auto,1fr,auto] md:grid-cols-[1fr,auto,1fr] items-center gap-2 sm:gap-4">
+      <div class="flex items-center gap-1 min-w-0 justify-self-start">
+        <button type="button"
+                class="md:hidden w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition flex-shrink-0"
+                aria-label="Open menu"
+                @click="mobileOpen = !mobileOpen">
+          <svg x-show="!mobileOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+          <svg x-show="mobileOpen" x-cloak width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <a href="/" class="flex items-center gap-2 sm:gap-2.5 font-display font-bold text-base sm:text-lg min-w-0">
+          
+            <img src="/uploads/logo-1783260029774.png" alt="" class="w-8 h-8 rounded-lg object-cover flex-shrink-0"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="w-8 h-8 rounded-lg items-center justify-center flex-shrink-0 hidden" style="background: #FF2200; color: #001018;">
+              B
+            </div>
+          
+          <span class="truncate">Battlepie</span>
+        </a>
+      </div>
+      <div class="hidden md:flex items-center gap-1 text-sm text-white/70 justify-self-center">
+        
+          <a class="nav-link" href="/">Home</a>
+        
+          <a class="nav-link" href="/store">Store</a>
+        
+        <a class="nav-link" href="https://discord.gg/battlepie" target="_blank" rel="noopener">Discord</a>
+      </div>
+      <div class="justify-self-end flex items-center gap-2 sm:gap-3">
+        <button type="button" onclick="window.__zlCartOpenRequested = true; document.dispatchEvent(new CustomEvent('zl:cart:open')); if (window.zlCartOpen) { window.zlCartOpen(); return; } setTimeout(function () { if (window.zlCartOpen) window.zlCartOpen(); }, 120);" x-data="{ count: 0 }" x-init="document.addEventListener('zl:cart:count', e => count = e.detail.count); if (window.zlCartCount) count = window.zlCartCount();" class="relative w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition" aria-label="Open cart" title="Cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          <span x-show="count" x-text="count" class="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-accent text-black text-[10px] font-bold flex items-center justify-center"></span>
+        </button>
+        
+          <a href="/login" class="btn btn-accent text-sm px-3 sm:px-4">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>
+            </svg>
+            <span class="hidden sm:inline">Login / Register</span>
+            <span class="sm:hidden">Login</span>
+          </a>
+        
+      </div>
+    </div>
+
+    <!-- Mobile menu drawer (md:hidden) -->
+    <div x-show="mobileOpen" x-cloak x-transition.opacity
+         class="md:hidden border-t border-white/10 glass">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex flex-col gap-1 text-sm">
+        
+          <a class="nav-link block" href="/" @click="mobileOpen = false">Home</a>
+        
+          <a class="nav-link block" href="/store" @click="mobileOpen = false">Store</a>
+        
+        
+          <a class="nav-link block" href="https://discord.gg/battlepie" target="_blank" rel="noopener" @click="mobileOpen = false">Discord</a>
+        
+      </div>
+    </div>
+  </nav>
+  
+
+  <main>
+    <style>
+  .hero-card {
+    background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 1.1rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .hero-card:hover { border-color: rgba(255,255,255,.16); transform: translateY(-2px); }
+  .hero-card.is-action { cursor: pointer; }
+
+  .logo-float {
+    animation: logoFloat 6s ease-in-out infinite;
+    filter: drop-shadow(0 25px 50px rgba(0,0,0,.7)) drop-shadow(0 0 40px rgba(0,229,255,.2));
+  }
+
+  /* Skin pop-out effect: head image extends above the panel. Rendered head-on
+     (no 3D tilt) — the subtle lift on hover is enough to feel alive. */
+  .skin-3d {
+    filter: drop-shadow(0 18px 22px rgba(0,0,0,.65)) drop-shadow(0 0 18px rgba(0,229,255,.18));
+    transform: translateY(0);
+    transform-origin: bottom center;
+    transition: transform .35s ease;
+  }
+  .profile-panel:hover .skin-3d { transform: translateY(-6px) scale(1.04); }
+  @keyframes logoFloat {
+    0%,100% { transform: translateY(0) }
+    50%     { transform: translateY(-12px) }
+  }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 2rem; transform: translateX(-50%) translateY(40px);
+    padding: .7rem 1.25rem; border-radius: .55rem;
+    background: rgba(3, 5, 10, .9); color: #fff; font-size: .9rem; font-weight: 500;
+    border: 1px solid rgba(255,255,255,.08);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+    z-index: 60;
+    display: inline-flex; align-items: center; gap: .55rem;
+  }
+  .toast.is-show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+
+<section class="hero-bg">
+  <div class="max-w-6xl mx-auto px-4 pt-16 pb-24 md:pt-20 md:pb-32">
+
+    <!-- 3-column hero: IP (left) · Logo (center) · Discord (right) -->
+    <div class="grid md:grid-cols-[1fr,auto,1fr] items-center gap-6 md:gap-10">
+
+      <!-- LEFT: IP card, click to copy -->
+      <button type="button" id="ip-card"
+              data-ip="play.battlepie.net"
+              class="hero-card is-action p-5 text-left w-full group">
+        <div class="flex items-center gap-4">
+          <div id="ip-icon-tile" class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition">
+            <!-- default: copy icon; swapped to tick after click -->
+            <svg id="ip-icon-copy" class="w-5 h-5"
+                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="11" height="11" rx="2"/>
+              <path d="M5 15V5a2 2 0 0 1 2-2h10"/>
+            </svg>
+            <!-- Tick inherits the tile color so it stays in theme. -->
+            <svg id="ip-icon-check" class="w-5 h-5 hidden"
+                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <div class="text-[10px] uppercase tracking-widest text-white/50">Server IP</div>
+            <div class="font-mono font-semibold text-lg truncate group-hover:text-accent transition">play.battlepie.net</div>
+          </div>
+        </div>
+        <div class="mt-3 pt-3 border-t border-white/5 flex items-center gap-2 text-sm">
+          <span class="relative flex h-2 w-2">
+            <span id="status-pulse" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span id="status-dot" class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span class="text-white/80">
+            <span id="status-online" class="font-semibold">—</span>
+            <span class="text-white/50 ml-1">players online</span>
+          </span>
+        </div>
+      </button>
+
+      <!-- CENTER: floating logo -->
+      <div class="flex flex-col items-center text-center order-first md:order-none">
+        
+          <img src="/uploads/logo-1783260029774.png" alt="Battlepie"
+               decoding="async"
+               class="logo-float w-56 h-56 md:w-80 md:h-80 rounded-3xl object-cover"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="logo-float w-56 h-56 md:w-80 md:h-80 rounded-3xl items-center justify-center font-display font-extrabold text-7xl md:text-8xl hidden"
+               style="background: #FF2200; color:#001018;">
+            B
+          </div>
+        
+        <h1 class="mt-6 font-display font-bold text-2xl md:text-4xl tracking-tight">Battlepie</h1>
+        <p class="mt-1 text-white/60 text-sm md:text-base max-w-sm">A next-gen Minecraft experience.</p>
+      </div>
+
+      <!-- RIGHT: Discord card, opens link in new tab -->
+      <a id="discord-card"
+         href="https://discord.gg/battlepie"
+         target="_blank" rel="noopener"
+         class="hero-card is-action p-5 w-full block group">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+               style="background: rgba(88,101,242,.15); border: 1px solid rgba(88,101,242,.35);">
+            <svg class="w-6 h-6" style="color:#5865F2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.07.07 0 0 0-.073.035c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.073-.036A19.73 19.73 0 0 0 3.683 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.099.245.197.372.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.04.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.548-13.66a.06.06 0 0 0-.031-.03zM8.02 15.33c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.974 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <div class="text-[10px] uppercase tracking-widest text-white/50">Community</div>
+            <div class="font-semibold text-lg truncate group-hover:text-accent transition">Discord</div>
+          </div>
+        </div>
+        <div class="mt-3 pt-3 border-t border-white/5 flex items-center gap-2 text-sm">
+          <span class="inline-flex rounded-full h-2 w-2 bg-[#5865F2]"></span>
+          <span class="text-white/80">
+            <span id="dc-online" class="font-semibold">—</span>
+            <span class="text-white/50 ml-1">members online</span>
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div id="toast" class="toast" role="status" aria-live="polite">
+  <svg class="w-4 h-4" style="color:#34d399" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+  </svg>
+  <span id="toast-msg">IP copied</span>
+</div>
+
+<section id="profile" class="max-w-6xl mx-auto px-4 -mt-16 relative z-10">
+  <div class="grid md:grid-cols-2 gap-4">
+
+    <!-- Panel 1: Profile (varies by login/link state) -->
+    
+      <!-- Not logged in -->
+      <div class="card p-6 flex flex-col justify-between min-h-[180px]">
+        <div>
+          <div class="text-[10px] uppercase tracking-widest text-white/50 mb-2">Your profile</div>
+          <div class="font-display font-semibold text-xl mb-1">Sign in to get started</div>
+          <p class="text-white/60 text-sm">Link your Discord and your Minecraft account to manage 2FA and password resets.</p>
+        </div>
+        <a href="/login" class="btn btn-accent self-start mt-4">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.07.07 0 0 0-.073.035c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.073-.036A19.73 19.73 0 0 0 3.683 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.099.245.197.372.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.04.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.548-13.66a.06.06 0 0 0-.031-.03zM8.02 15.33c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.974 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+          Login with Discord
+        </a>
+      </div>
+
+    
+
+    <!-- Panel 2: Donate -->
+    
+      <a href="https://battlepie.net/store" target="_blank" rel="noopener"
+         class="card p-6 block group relative overflow-hidden min-h-[180px] hover:border-accent/40 transition">
+        <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-25 blur-3xl"
+             style="background: #FF2200;"></div>
+        <div class="relative">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center"
+                 style="background: rgba(244,114,182,.12); border: 1px solid rgba(244,114,182,.30);">
+              <svg class="w-6 h-6" style="color:#f472b6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21s-7.5-4.7-9.5-9.2C1 8.4 3.4 5 7 5c1.9 0 3.6 1 4.6 2.5h.8C13.4 6 15.1 5 17 5c3.6 0 6 3.4 4.5 6.8C19.5 16.3 12 21 12 21z"/>
+              </svg>
+            </div>
+            <div class="text-[10px] uppercase tracking-widest text-white/50">Support us</div>
+          </div>
+          <div class="font-display font-bold text-xl">Consider donating</div>
+          <p class="text-white/60 text-sm mt-1">It helps us keep the lights on, the maps fresh, and the lag away.</p>
+          <div class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent">
+            Open store
+            <svg class="w-4 h-4 transition group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+    
+
+  </div>
+</section>
+
+<script>
+// --- Server status ---
+(async function refreshStatus() {
+  const pulse = document.getElementById('status-pulse');
+  const dot   = document.getElementById('status-dot');
+  try {
+    const r = await fetch('/api-public/status');
+    const d = await r.json();
+    if (d.online) {
+      dot.className   = 'relative inline-flex rounded-full h-2 w-2 bg-emerald-500';
+      pulse.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75';
+    } else {
+      dot.className   = 'relative inline-flex rounded-full h-2 w-2 bg-rose-500';
+      pulse.className = 'absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-0';
+    }
+    document.getElementById('status-online').textContent = d.online ? d.players.online : 0;
+  } catch { /* ignore */ }
+})();
+
+// --- Discord widget ---
+(async function refreshDiscord() {
+  try {
+    const r = await fetch('/api-public/discord');
+    const d = await r.json();
+    const el = document.getElementById('dc-online');
+    if (!el) return;
+    if (d.enabled && typeof d.online === 'number') {
+      el.textContent = d.online.toLocaleString();
+    } else {
+      el.textContent = '—';
+    }
+  } catch { /* ignore */ }
+})();
+
+// --- IP copy + toast ---
+(function () {
+  const card = document.getElementById('ip-card');
+  if (!card) return;
+  const iconCopy  = document.getElementById('ip-icon-copy');
+  const iconCheck = document.getElementById('ip-icon-check');
+  const toast     = document.getElementById('toast');
+  const toastMsg  = document.getElementById('toast-msg');
+  let toastTimer  = 0;
+  let iconTimer   = 0;
+
+  function showToast(msg) {
+    toastMsg.textContent = msg;
+    toast.classList.add('is-show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('is-show'), 1800);
+  }
+
+  card.addEventListener('click', async () => {
+    const ip = card.dataset.ip || '';
+    if (!ip) return;
+    let ok = false;
+    try { await navigator.clipboard.writeText(ip); ok = true; }
+    catch {
+      // Fallback for non-secure contexts
+      const ta = document.createElement('textarea');
+      ta.value = ip; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { ok = document.execCommand('copy'); } catch {}
+      document.body.removeChild(ta);
+    }
+    if (!ok) { showToast('Copy failed — copy manually: ' + ip); return; }
+
+    const tile = document.getElementById('ip-icon-tile');
+    iconCopy.classList.add('hidden');
+    iconCheck.classList.remove('hidden');
+    // Add class to trigger green state
+    if (tile) {
+      tile.classList.add('ip-copied');
+    }
+    showToast('IP copied');
+    clearTimeout(iconTimer);
+    iconTimer = setTimeout(() => {
+      iconCheck.classList.add('hidden');
+      iconCopy.classList.remove('hidden');
+      if (tile) {
+        tile.classList.remove('ip-copied');
+      }
+    }, 1800);
+  });
+})();
+// (Removed: site-wide 60s location.reload(). Status numbers refresh when the
+//  user navigates; full reloads were disorienting while the user was reading.)
+</script>
+
+  </main>
+  
+<div id="zl-cart-root" x-data="zlCart()" x-init="init()" class="contents">
+
+  <!-- Drawer + backdrop -->
+  <div x-cloak x-show="open" class="fixed inset-0 z-[60]" @keydown.escape.window="open = false">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+         x-transition.opacity
+         @click="open = false"></div>
+    <aside x-show="open" class="zl-cart-drawer"
+           x-transition:enter="transition ease-out duration-250"
+           x-transition:enter-start="translate-x-full"
+           x-transition:enter-end="translate-x-0"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="translate-x-0"
+           x-transition:leave-end="translate-x-full">
+      <header class="flex items-center justify-between px-5 py-4 border-b border-white/10">
+        <div>
+          <div class="font-display font-bold text-lg">Your cart</div>
+          <div class="text-xs text-white/40">
+            <span x-text="count"></span> item<span x-show="count !== 1">s</span>
+          </div>
+        </div>
+        <button @click="open = false" class="text-white/50 hover:text-white text-2xl leading-none">×</button>
+      </header>
+
+      <div class="flex-1 overflow-y-auto p-4 space-y-3">
+        <template x-if="!cart || !cart.lines.length">
+          <div class="text-center py-12">
+            <div class="text-white/40 mb-3">Your cart is empty.</div>
+            <a href="/store" @click="open = false"
+               class="btn border border-white/15 hover:bg-white/5 text-sm">Browse products</a>
+          </div>
+        </template>
+
+        <template x-for="line in (cart && cart.lines) || []" :key="line.productId">
+          <div class="grid grid-cols-[60px,1fr,auto] gap-3 items-center p-3 rounded-xl bg-white/5 border border-white/5">
+            <a :href="'/store/p/' + line.slug" @click="open = false"
+               class="block w-14 h-14 rounded-lg overflow-hidden bg-black/30 ring-1 ring-white/10">
+              <template x-if="line.imageUrl"><img :src="line.imageUrl" class="w-full h-full object-cover"></template>
+            </a>
+            <div class="min-w-0">
+              <a :href="'/store/p/' + line.slug" @click="open = false"
+                 class="font-medium truncate block hover:underline" x-text="line.name"></a>
+              <div class="text-xs text-white/40 font-mono"
+                   x-text="formatLine(line)"></div>
+              <div class="flex items-center gap-1 mt-1">
+                <button type="button" @click="setQty(line, line.quantity - 1)"
+                        :disabled="busy"
+                        class="w-6 h-6 rounded bg-white/5 hover:bg-white/10 text-xs">−</button>
+                <span class="w-7 text-center font-mono text-xs" x-text="line.quantity"></span>
+                <button type="button" @click="setQty(line, line.quantity + 1)"
+                        :disabled="busy || !line.allowQuantity"
+                        :class="{ 'opacity-40 cursor-not-allowed': !line.allowQuantity }"
+                        class="w-6 h-6 rounded bg-white/5 hover:bg-white/10 text-xs">+</button>
+                <button type="button" @click="removeLine(line)"
+                        :disabled="busy"
+                        class="ml-2 text-rose-300 hover:text-rose-200 text-xs">Remove</button>
+              </div>
+            </div>
+            <div class="font-mono text-sm" x-text="formatPrice(line.lineTotalUsdCents)"></div>
+          </div>
+        </template>
+      </div>
+
+      <footer class="border-t border-white/10 p-5 space-y-3" x-show="cart && cart.lines.length">
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-white/60">Subtotal</span>
+          <span class="font-mono" x-text="formatPrice(cart && cart.subtotalUsdCents)"></span>
+        </div>
+        <a href="/store/checkout" class="btn btn-accent w-full text-center">Checkout →</a>
+      </footer>
+    </aside>
+  </div>
+</div>
+
+<style>
+  .zl-cart-drawer {
+    position: absolute; right: 0; top: 0; bottom: 0;
+    width: min(420px, 92vw);
+    background: #0b0f17;
+    border-left: 1px solid rgba(255,255,255,.08);
+    display: flex; flex-direction: column;
+    box-shadow: -16px 0 40px rgba(0,0,0,.5);
+  }
+  :root[data-theme="light"] .zl-cart-drawer {
+    background: #ffffff;
+    border-left-color: rgba(13,17,23,.1);
+    box-shadow: -16px 0 40px rgba(13,17,23,.16);
+  }
+</style>
+
+<script>
+  // Cart store. Exposes a global zlCartRefresh() so other code (e.g. an
+  // Add-to-Cart button outside the drawer) can poke the drawer to re-fetch
+  // after a server-side mutation.
+  function zlCart() {
+    return {
+      open: false,
+      busy: false,
+      count: 0,
+      cart: null,
+      async init() {
+        window.zlCartRefresh = () => this.refresh();
+        window.zlCartOpen    = () => { this.open = true; };
+        window.zlCartCount   = () => this.count;
+        await this.refresh();
+        document.dispatchEvent(new CustomEvent('zl:cart:count', { detail: { count: this.count } }));
+        try {
+          if (sessionStorage.getItem('zl:cart:open-on-load') === '1') {
+            this.open = true;
+            sessionStorage.removeItem('zl:cart:open-on-load');
+          }
+        } catch (e) {}
+        if (window.__zlCartOpenRequested) {
+          this.open = true;
+          window.__zlCartOpenRequested = false;
+        }
+        document.addEventListener('zl:cart:refresh', () => this.refresh());
+        document.addEventListener('zl:cart:open',    () => { this.open = true; });
+      },
+      async refresh() {
+        try {
+          const r = await fetch('/store/cart', { headers: { Accept: 'application/json' } });
+          const j = await r.json();
+          if (j && j.cart) { this.cart = j.cart; this.count = j.count || 0; document.dispatchEvent(new CustomEvent('zl:cart:count', { detail: { count: this.count } })); }
+        } catch { /* best effort */ }
+      },
+      async setQty(line, qty) {
+        if (qty < 0) qty = 0;
+        this.busy = true;
+        try {
+          const r = await fetch('/store/cart/update', {
+            method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' },
+            body: new URLSearchParams({ productId: line.productId, quantity: qty }),
+          });
+          const j = await r.json();
+          if (j.cart) { this.cart = j.cart; this.count = j.count || 0; document.dispatchEvent(new CustomEvent('zl:cart:count', { detail: { count: this.count } })); }
+        } finally { this.busy = false; }
+      },
+      async removeLine(line) {
+        this.busy = true;
+        try {
+          const r = await fetch('/store/cart/remove', {
+            method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' },
+            body: new URLSearchParams({ productId: line.productId }),
+          });
+          const j = await r.json();
+          if (j.cart) { this.cart = j.cart; this.count = j.count || 0; document.dispatchEvent(new CustomEvent('zl:cart:count', { detail: { count: this.count } })); }
+        } finally { this.busy = false; }
+      },
+      formatPrice(cents) {
+        if (cents == null || isNaN(cents)) return '';
+        // Same conversion as server-side formatPrice, mirrored here so the
+        // drawer can re-render without another round trip. Currency settings
+        // are injected via window.__zlCurrency below.
+        const c = window.__zlCurrency || { symbol: '$', rateToUsd: 1, prefix: true, suffix: false };
+        const v = (cents / 100) * (c.rateToUsd || 1);
+        const body = v.toFixed(2);
+        return c.suffix && !c.prefix ? body + ' ' + c.symbol : c.symbol + body;
+      },
+      formatLine(line) {
+        let s = this.formatPrice(line.unitPriceUsdCents);
+        if (line.isSubscription) s += ' / ' + (line.billingPeriodDays || 30) + 'd';
+        return s;
+      },
+    };
+  }
+
+  // Inject the currency snapshot once per page so the drawer's JS price
+  // formatter matches what the server-side templates rendered.
+  window.__zlCurrency = {"code":"USD","symbol":"$","rateToUsd":1,"prefix":true,"suffix":false};
+</script>
+
+
+  
+  <footer class="mt-12 sm:mt-16 md:mt-24 border-t border-white/5 py-6 sm:py-8 md:py-10 text-sm text-white/50">
+    
+    <div class="max-w-6xl mx-auto px-4 flex flex-col items-center justify-center gap-3 text-center">
+      <div class="text-white/60">© 2026 Battlepie</div>
+      <div class="flex items-center gap-2">
+        <a href="/terms" class="hover:text-white transition">Terms</a>
+        <span class="text-white/35">&middot;</span>
+        <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
+        <span class="text-white/35">&middot;</span>
+        <a href="/cookies" class="hover:text-white transition">Cookie Policy</a>
+      </div>
+      <div class="flex items-center gap-3">
+        
+          <a href="https://discord.gg/battlepie" target="_blank" rel="noopener noreferrer"
+             aria-label="Discord" title="Discord"
+             class="inline-flex items-center justify-center w-8 h-8 rounded-md border border-white/10 bg-white/5 hover:bg-white/10 hover:text-white transition">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.91 19.91 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.444.864-.608 1.249a18.27 18.27 0 0 0-5.487 0c-.164-.39-.404-.874-.617-1.249a.077.077 0 0 0-.08-.037A19.74 19.74 0 0 0 3.678 4.37a.07.07 0 0 0-.032.027C.534 9.046-.321 13.58.099 18.057a.082.082 0 0 0 .031.055 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.027c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.13 13.13 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.1.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.076.076 0 0 0-.04.107c.36.698.772 1.363 1.225 1.993a.077.077 0 0 0 .084.028 19.86 19.86 0 0 0 6-3.03.077.077 0 0 0 .031-.054c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.03zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.335.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.156 2.42 0 1.334-.946 2.419-2.156 2.419zm7.974 0c-1.183 0-2.156-1.085-2.156-2.419 0-1.335.955-2.42 2.156-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.334-.946 2.419-2.157 2.419z"/></svg>
+          </a>
+        
+          <a href="https://www.instagram.com/battlepie.in" target="_blank" rel="noopener noreferrer"
+             aria-label="Instagram" title="Instagram"
+             class="inline-flex items-center justify-center w-8 h-8 rounded-md border border-white/10 bg-white/5 hover:bg-white/10 hover:text-white transition">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37a4 4 0 1 1-7.914 1.173A4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        
+      </div>
+    </div>
+  </footer>
+  
+  <style>[x-cloak]{display:none!important}</style>
+
+  
+  <script>
+  // Site-wide IP-copy: any element with class .ip-pill copies its data-ip on
+  // click. Falls back to a hidden textarea if navigator.clipboard is blocked
+  // (non-secure contexts). The .ip-pill-copied class flashes a green pill.
+  document.addEventListener('click', function (ev) {
+    var pill = ev.target.closest && ev.target.closest('.ip-pill');
+    if (!pill) return;
+    var ip = pill.dataset.ip || pill.textContent.trim();
+    if (!ip) return;
+    var done = function () {
+      pill.classList.add('ip-pill-copied');
+      setTimeout(function () { pill.classList.remove('ip-pill-copied'); }, 1400);
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(ip).then(done).catch(function () {
+        // Fallback below.
+        copyFallback(ip, done);
+      });
+    } else {
+      copyFallback(ip, done);
+    }
+  });
+  function copyFallback(text, cb) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); cb && cb(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  </script>
+
+  <!-- Global image error fallback & lazy-load observer.
+       Any <img> without an explicit onerror falls back to a graceful
+       placeholder. Below-fold images get native lazy loading for free. -->
+  <script>
+  (function () {
+    // Fallback sources by common patterns.
+    var FALLBACKS = {
+      skin:    'https://mc-heads.net/player/MHF_Steve/120',
+      avatar:  'https://mc-heads.net/avatar/MHF_Steve/48',
+      discord: 'https://cdn.discordapp.com/embed/avatars/0.png',
+    };
+    function isSkinPath(s)  { return /\/skin\//.test(s); }
+    function isAvatarPath(s){ return /\/avatar\//.test(s); }
+
+    document.addEventListener('error', function (ev) {
+      var el = ev.target;
+      if (el.tagName !== 'IMG') return;
+      // Prevent infinite loop if fallback itself fails.
+      if (el.dataset.zlFallback === '1') return;
+      var src = el.src || '';
+      var fb = isSkinPath(src) ? FALLBACKS.skin
+             : isAvatarPath(src) ? FALLBACKS.avatar
+             : el.closest('.discord') ? FALLBACKS.discord
+             : null;
+      if (fb) {
+        el.dataset.zlFallback = '1';
+        el.src = fb;
+      }
+    }, true);
+
+    // IntersectionObserver for images that lack loading="lazy".
+    // Adds native lazy loading dynamically so the server HTML doesn't
+    // need to be modified for every <img> tag.
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            var img = e.target;
+            if (!img.loading) img.loading = 'lazy';
+            if (!img.decoding) img.decoding = 'async';
+            io.unobserve(img);
+          }
+        });
+      }, { rootMargin: '200px' });
+      document.querySelectorAll('img:not([loading])').forEach(function (img) {
+        io.observe(img);
+      });
+    }
+  })();
+  </script>
+
+  <!-- ===== Cookie Consent Banner ===== -->
+  <!-- Shown to ALL visitors (anonymous + logged-in). Logged-in users can
+       also accept via the /accept-legal flow, but this banner is
+       independent — it only manages cookie consent, not legal acceptance. -->
+  
+  <div id="zl-cookie-banner"
+       class="fixed bottom-0 inset-x-0 z-[70] hidden">
+    <div class="max-w-4xl mx-auto p-4">
+      <div class="card glass p-5 shadow-2xl border border-white/10">
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-2">
+              <svg class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <h3 class="font-display font-semibold text-sm">Cookie Preferences</h3>
+            </div>
+            <p class="text-xs text-white/60 leading-relaxed">
+              We use cookies to maintain your session and improve your experience.
+              Essential cookies are required for the site to function.
+              
+                <a href="/cookies" target="_blank" class="text-accent hover:underline">Learn more in our Cookie Policy</a>.
+              
+            </p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button type="button" id="zl-cookie-deny"
+                    class="px-4 py-2 rounded-lg border border-white/15 text-sm text-white/60 hover:bg-white/5 transition">
+              Deny
+            </button>
+            <button type="button" id="zl-cookie-accept"
+                    class="px-4 py-2 rounded-lg btn-accent text-sm font-semibold">
+              Accept All
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var KEY = 'zl-cookie-consent';
+    var banner = document.getElementById('zl-cookie-banner');
+    if (!banner) return;
+    try {
+      if (localStorage.getItem(KEY)) return;
+    } catch (e) { /* private mode — show anyway */ }
+    banner.classList.remove('hidden');
+    document.getElementById('zl-cookie-accept').addEventListener('click', function () {
+      try { localStorage.setItem(KEY, JSON.stringify({ consent: 'all', ts: Date.now() })); } catch (e) {}
+      banner.classList.add('hidden');
+    });
+    document.getElementById('zl-cookie-deny').addEventListener('click', function () {
+      try { localStorage.setItem(KEY, JSON.stringify({ consent: 'essential', ts: Date.now() })); } catch (e) {}
+      banner.classList.add('hidden');
+      // Clear any non-essential cookies if present.
+      try {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+          var name = cookies[i].split('=')[0].trim();
+          if (name && name !== 'zl_sess' && name !== 'zl-theme') {
+            document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+          }
+        }
+      } catch (e) {}
+    });
+  })();
+  </script>
+  
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"a933ac87bb5042189f290bdefb317bd0","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
